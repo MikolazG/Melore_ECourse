@@ -1,0 +1,132 @@
+html, body {
+    height: 100%;
+    overflow: hidden; 
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* WRAPPER */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.login-card {
+    width: 85%;
+    max-width: 1400px;
+    height: 90%;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+/* LEFT IMAGE */
+.login-left {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.login-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RIGHT PANEL */
+.login-right {
+    width: 50%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    font-family: "Anton", sans-serif;
+    font-size: 35px;
+    letter-spacing: 3px;
+}
+
+.login-title {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    margin-top: 5px;
+}
+
+.login-sub {
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* INPUTS */
+.label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.m-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 20px;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.forgot {
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* BUTTONS */
+.m-btn-black {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.m-btn-google {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.google-icon {
+    width: 18px;
+}
+
+/* SIGN UP CENTER */
+.signup-text {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+}

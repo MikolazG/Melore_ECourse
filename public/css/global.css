@@ -1,0 +1,83 @@
+/* === GLOBAL RESET SINGKAT === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    color: #111;
+}
+
+/* Biar konten nggak nempel ke edge browser */
+main {
+    padding-bottom: 40px;
+}
+
+/* === NAVBAR === */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #f4f4f4;
+    padding: 14px 0;
+}
+
+.nav-container {
+    width: 92%;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    font-family: "Anton", sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #111;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.nav-login {
+    padding: 8px 22px;
+    background: #000;
+    color: #fff;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* RESPONSIVE NAV SIMPLE */
+@media (max-width: 768px) {
+    .nav-container {
+        gap: 12px;
+    }
+
+    .nav-links {
+        display: none; /* biar simple dulu, bisa dibikin burger nanti */
+    }
+}
