@@ -1,47 +1,46 @@
-## 🎯 Fitur Utama
+## Fitur Utama
 
-### 👨‍🎓 Untuk User / Siswa
-- 🔐 **User Authentication**
+- **User Authentication**
   - Register & login user
   - Manajemen profil dasar
-- 📱 **Responsive UI**
+- **Responsive UI**
   - Tampilan yang menyesuaikan berbagai ukuran layar (mobile, tablet, desktop)
   - Menggunakan komponen dan utility class dari Bootstrap 5.2
-- 📚 **Course Listing**
+- **Course Listing**
   - Melihat daftar course yang tersedia
   - Detail course: deskripsi, level, harga, dan materi
-- 🎯 **Filter & Kategori**
+- **Filter & Kategori**
   - Filter course berdasarkan kategori, misalnya:
     - Piano
     - Guitar
     - Violin
-- 🛒 **Add to Cart**
+- **Add to Cart**
   - Menambahkan course ke keranjang
   - Melanjutkan ke proses checkout
-- 💳 **Payment Gateway Integration**
+- **Payment Gateway Integration**
   - Integrasi dengan payment gateway (contoh: Midtrans)
   - Simulasi pembayaran online untuk pembelian course
-- 🎼 **My Courses**
+- **My Courses**
   - Melihat course yang sudah dibeli
   - Akses materi/lesson yang sudah terbuka
 
-### 🛠️ Untuk Admin
-- 📊 **Admin Dashboard**
+### Admin
+- **Admin Dashboard**
   - Melihat statistik user yang mendaftar
   - Melihat daftar course, order, dan payment
-- 🎓 **Course Management**
+- **Course Management**
   - CRUD Course (Create, Read, Update, Delete)
   - Mengatur kategori course (Piano, Guitar, Violin, dll.)
   - Mengatur materi / lesson per course
-- 👥 **User Management**
+- **User Management**
   - Melihat daftar user yang terdaftar
-- 💰 **Payment & Enrollment Tracking**
+- **Payment & Enrollment Tracking**
   - Melihat transaksi pembayaran
   - Melihat user yang sudah enroll ke course tertentu
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **Backend Framework** : [Laravel 12](https://laravel.com/)
 - **Language**         : PHP 8.x
