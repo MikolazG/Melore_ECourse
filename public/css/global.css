@@ -42,7 +42,8 @@ main {
 .nav-logo {
     font-family: "Anton", sans-serif;
     font-size: 26px;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
+    font-weight: 800;
 }
 
 .nav-links {
