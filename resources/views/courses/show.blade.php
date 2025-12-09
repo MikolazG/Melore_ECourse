@@ -1,21 +1,21 @@
-{{-- resources/views/courses/show.blade.php --}}
 @extends('layouts.main')
 
 @section('title', $course->title . ' | MÉLORÉ')
 
 @section('content')
 <div class="container py-5">
-    <div class="row g-4">
+    <div class="row g-5">
+
         {{-- MAIN COLUMN --}}
         <div class="col-lg-8">
 
-            {{-- Title & basic info --}}
-            <h1 class="h2 mb-1">{{ $course->title }}</h1>
+            {{-- Title & Info --}}
+            <h1 class="fw-bold mb-2">{{ $course->title }}</h1>
             <p class="text-muted mb-3">
-                {{ $course->category }} • {{ $course->level }}
+                {{ $course->category }} • Level {{ $course->level }}
             </p>
 
-            <p class="mb-4">
+            <p class="text-secondary mb-4">
                 {{ $course->description }}
             </p>
 
@@ -25,7 +25,6 @@
                     $originalUrl = $course->video_url;
                     $videoUrl = $originalUrl;
 
-                    // Convert YouTube watch URL to embed
                     if (str_contains($videoUrl, 'youtube.com/watch')) {
                         $videoUrl = preg_replace(
                             '#https?://(www\.)?youtube\.com/watch\?v=([^&]+).*#',
@@ -41,49 +40,47 @@
                     }
                 @endphp
 
-                <div class="ratio ratio-16x9 mb-2">
+                <div class="ratio ratio-16x9 rounded-4 overflow-hidden mb-3 shadow-sm">
                     <iframe
                         src="{{ $videoUrl }}"
-                        title="{{ $course->title }}"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        class="rounded-4"
                         allowfullscreen
-                    ></iframe>
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+                    </iframe>
                 </div>
 
                 <p class="small text-muted mb-4">
-                    If the video cannot be played, you can
-                    <a href="{{ $originalUrl }}" target="_blank" rel="noopener">
-                        watch it directly on YouTube
-                    </a>.
+                    If the video cannot be played, you may
+                    <a href="{{ $originalUrl }}" target="_blank">watch it on YouTube</a>.
                 </p>
             @endif
 
             {{-- LESSONS --}}
-            <h2 class="h4 mb-3">Lessons</h2>
+            <h4 class="fw-semibold mt-4 mb-3">Lessons</h4>
 
             @if ($lessons->isEmpty())
-                <div class="alert alert-info">
+                <div class="alert alert-info rounded-4 p-3">
                     This course doesn’t have any lessons yet.
                 </div>
             @else
-                <div class="list-group">
+                <div class="list-group rounded-4 shadow-sm">
                     @foreach ($lessons as $lesson)
-                        <div class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="me-3">
-                                    <h5 class="mb-1">
+                        <div class="list-group-item py-3">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5 class="mb-1 fw-semibold">
                                         {{ $loop->iteration }}. {{ $lesson->title }}
                                     </h5>
+
                                     @if ($lesson->description)
-                                        <p class="mb-1 text-muted">
+                                        <p class="text-muted small mb-1">
                                             {{ $lesson->description }}
                                         </p>
                                     @endif
                                 </div>
 
                                 @if ($lesson->video_url)
-                                    <span class="badge bg-primary rounded-pill mt-1">
+                                    <span class="badge bg-primary rounded-pill align-self-start">
                                         Video
                                     </span>
                                 @endif
@@ -97,13 +94,18 @@
 
         {{-- SIDEBAR --}}
         <div class="col-lg-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-lg border-0 rounded-4">
+
                 @if ($course->thumbnail_url)
-                    <img src="{{ $course->thumbnail_url }}" class="card-img-top" alt="{{ $course->title }}">
+                    <img src="{{ $course->thumbnail_url }}"
+                         class="card-img-top rounded-top-4"
+                         style="height: 200px; object-fit: cover;"
+                    >
                 @endif
 
                 <div class="card-body">
-                    <h3 class="h4 mb-2">
+
+                    <h3 class="fw-bold mb-2">
                         ${{ number_format($course->price, 2) }}
                     </h3>
 
@@ -114,37 +116,42 @@
 
                     @guest
                         <p class="small text-muted mb-3">
-                            Please login to enroll in this course.
+                            Please login to enroll.
                         </p>
+
                         <div class="d-grid gap-2">
-                            <a href="{{ route('login') }}" class="btn btn-primary">
+                            <a href="{{ route('login') }}" class="btn btn-primary rounded-pill">
                                 Login
                             </a>
-                            <a href="{{ route('register') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('register') }}" class="btn btn-outline-secondary rounded-pill">
                                 Register
                             </a>
                         </div>
+
                     @else
                         @if ($isEnrolled)
                             <div class="d-grid gap-2">
-                                <button class="btn btn-success" disabled>
+                                <button class="btn btn-success rounded-pill" disabled>
                                     Enrolled
                                 </button>
-                                <a href="{{ route('profile.my-courses') }}" class="btn btn-outline-primary">
+                                <a href="{{ route('profile.my-courses') }}" class="btn btn-outline-primary rounded-pill">
                                     Go to lessons
                                 </a>
                             </div>
                         @else
                             <div class="d-grid gap-2">
-                                <a href="{{ route('payments.checkout', $course) }}" class="btn btn-primary">
+                                <a href="{{ route('payments.checkout', $course) }}"
+                                   class="btn btn-primary rounded-pill">
                                     Enroll now
                                 </a>
                             </div>
                         @endif
                     @endguest
+
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
