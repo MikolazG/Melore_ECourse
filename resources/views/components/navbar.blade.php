@@ -1,46 +1,78 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
+<style>
+    .navbar-melore .pill-wrapper {
+        background-color: #000;
+        padding: .2rem .35rem;
+        border-radius: 999px;
+        box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    }
+
+    .navbar-melore .pill-link {
+        background-color: transparent;
+        color: #fff;
+        border: 0;
+        transition: background-color .15s ease, color .15s ease;
+    }
+
+    .navbar-melore .pill-link:hover,
+    .navbar-melore .pill-link:focus {
+        background-color: rgba(255,255,255,0.12);
+        color: #fff;
+    }
+
+    .navbar-melore .active-pill,
+    .navbar-melore .active-pill:hover,
+    .navbar-melore .active-pill:focus,
+    .navbar-melore .active-pill:active {
+        background-color: #ffffff;
+        color: #111 !important;
+        box-shadow: 0 0 0 .1rem rgba(0,0,0,.04);
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm navbar-melore">
     <div class="container d-flex align-items-center justify-content-between">
-        {{-- Brand --}}
+
         <a href="{{ route('home') }}" class="navbar-brand fw-bold text-dark me-4">
-            SONARIA
+            MÉLORÉ
         </a>
 
-        {{-- Center pill navigation --}}
         <div class="d-none d-lg-flex flex-grow-1 justify-content-center">
-            <div class="bg-light rounded-pill px-2 py-1 d-inline-flex align-items-center shadow-sm">
-                @php
-                    $isHome    = request()->routeIs('home');
-                    $isCourses = request()->routeIs('courses.*');
-                    $isProfile = request()->routeIs('profile.*');
-                @endphp
+            @php
+                $isHome    = request()->routeIs('home');
+                $isCourses = request()->routeIs('courses.*');
 
+                $isProfile = request()->routeIs('profile.*')
+                    || request()->routeIs('login')
+                    || request()->routeIs('register');
+            @endphp
+
+            <div class="pill-wrapper d-inline-flex align-items-center">
                 <a href="{{ route('home') }}"
-                   class="btn btn-sm rounded-pill px-4 me-1 {{ $isHome ? 'btn-warning text-white shadow-sm' : 'btn-light text-dark border-0' }}">
+                   class="btn btn-sm rounded-pill px-4 me-1 pill-link {{ $isHome ? 'active-pill' : '' }}">
                     Home
                 </a>
 
                 <a href="{{ route('courses.index') }}"
-                   class="btn btn-sm rounded-pill px-4 me-1 {{ $isCourses ? 'btn-warning text-white shadow-sm' : 'btn-light text-dark border-0' }}">
+                   class="btn btn-sm rounded-pill px-4 me-1 pill-link {{ $isCourses ? 'active-pill' : '' }}">
                     Courses
                 </a>
 
                 @auth
                     <a href="{{ route('profile.home') }}"
-                       class="btn btn-sm rounded-pill px-4 {{ $isProfile ? 'btn-warning text-white shadow-sm' : 'btn-light text-dark border-0' }}">
+                       class="btn btn-sm rounded-pill px-4 pill-link {{ $isProfile ? 'active-pill' : '' }}">
                         Profile
                     </a>
                 @endauth
 
                 @guest
                     <a href="{{ route('login') }}"
-                       class="btn btn-sm rounded-pill px-4 {{ $isProfile ? 'btn-warning text-white shadow-sm' : 'btn-light text-dark border-0' }}">
+                       class="btn btn-sm rounded-pill px-4 pill-link {{ $isProfile ? 'active-pill' : '' }}">
                         Profile
                     </a>
                 @endguest
             </div>
         </div>
 
-        {{-- Right side: auth --}}
         <div class="d-flex align-items-center ms-3">
             @auth
                 <span class="me-3 small text-muted d-none d-md-inline">
@@ -58,7 +90,7 @@
                 <a href="{{ route('login') }}" class="btn btn-outline-dark btn-sm rounded-pill px-3 me-2">
                     Login
                 </a>
-                <a href="{{ route('register') }}" class="btn btn-warning btn-sm rounded-pill px-3 text-white">
+                <a href="{{ route('register') }}" class="btn btn-dark btn-sm rounded-pill px-3 text-white">
                     Register
                 </a>
             @endguest
