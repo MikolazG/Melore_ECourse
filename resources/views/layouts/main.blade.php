@@ -25,5 +25,6 @@
     @include('components.footer')
 
     <script src="{{ asset('bootstrap5.2/js/bootstrap.bundle.min.js') }}"></script>
+
 </body>
 </html>

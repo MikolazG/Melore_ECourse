@@ -16,7 +16,7 @@
                         {{ $course->category }} • {{ $course->level }}
                     </p>
                     <p class="card-text fw-bold mb-0">
-                        Total: ${{ number_format($course->price, 2) }}
+                        Total: Rp{{ number_format($course->price, 2) }}
                     </p>
                 </div>
             </div>
@@ -36,7 +36,6 @@
     </div>
 </div>
 
-{{-- Snap JS (Sandbox) --}}
 <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ $clientKey }}"></script>
 
@@ -46,7 +45,6 @@
     payButton.addEventListener('click', function () {
         window.snap.pay('{{ $snapToken }}', {
             onSuccess: function (result) {
-                // kirim ke backend untuk nyimpan payment & enroll
                 fetch("{{ route('payments.complete') }}", {
                     method: "POST",
                     headers: {
