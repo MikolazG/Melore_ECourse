@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
@@ -16,7 +15,10 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
 
             $table->string('order_id')->unique();
-            $table->decimal('amount', 10, 2);
+
+            // SIMPAN DALAM RUPIAH TANPA DESIMAL, CONTOH: 49000, 79000
+            $table->unsignedBigInteger('amount');
+
             $table->string('status')->default('pending');
             $table->string('payment_type')->nullable();
             $table->string('transaction_time')->nullable();
@@ -26,7 +28,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
 
     public function down(): void
     {
