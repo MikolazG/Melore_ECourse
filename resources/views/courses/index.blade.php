@@ -7,15 +7,53 @@
     <h1 class="fw-bold h3 mb-0">All Courses</h1>
 
     {{-- SEARCH BAR --}}
-    <form action="{{ route('courses.index') }}" method="GET" class="d-flex">
+    <form action="{{ route('courses.index') }}" method="GET" class="d-flex align-items-center gap-1">
         <input type="text"
                name="search"
                class="form-control rounded-pill me-2"
                placeholder="Search courses..."
                value="{{ request('search') }}">
-        <button class="btn btn-primary rounded-pill px-4">Search</button>
+
+        {{-- keep filter values --}}
+        <input type="hidden" name="category" value="{{ request('category') }}">
+        <input type="hidden" name="price" value="{{ request('price') }}">
+
+        <button class="btn btn-dark btn-sm rounded-pill">Search</button>
     </form>
 </div>
+
+{{-- FILTER FORM --}}
+<form action="{{ route('courses.index') }}" method="GET" class="row g-2 mb-4">
+    {{-- keep search value --}}
+    <input type="hidden" name="search" value="{{ request('search') }}">
+
+    {{-- CATEGORY --}}
+    <div class="col-md-4">
+        <select name="category" class="form-select rounded-pill">
+            <option value="">All Categories</option>
+            <option value="guitar" {{ request('category') == 'guitar' ? 'selected' : '' }}>Guitar</option>
+            <option value="drum" {{ request('category') == 'drum' ? 'selected' : '' }}>Drum</option>
+            <option value="piano" {{ request('category') == 'piano' ? 'selected' : '' }}>Piano</option>
+            <option value="vocal" {{ request('category') == 'vocal' ? 'selected' : '' }}>Vocal</option>
+        </select>
+    </div>
+
+    {{-- PRICE --}}
+    <div class="col-md-4">
+        <select name="price" class="form-select rounded-pill">
+            <option value="">All Prices</option>
+            <option value="0-50000" {{ request('price') == '0-50000' ? 'selected' : '' }}>Rp 0 – RP 50.000</option>
+            <option value="50000-100000" {{ request('price') == '50000-100000' ? 'selected' : '' }}>Rp 50.000 – Rp 100.000</option>
+            <option value="100000-200000" {{ request('price') == '100000-200000' ? 'selected' : '' }}>Rp 100.000 – Rp 200.000</option>
+            <option value="200000+" {{ request('price') == '200000+' ? 'selected' : '' }}>Rp 200.000+</option>
+        </select>
+    </div>
+
+    {{-- FILTER BUTTON --}}
+    <div class="col-md-4">
+        <button class="btn btn-outline-dark rounded-pill">Filter</button>
+    </div>
+</form>
 
 @if ($courses->isEmpty())
     <p class="text-muted">No courses available yet.</p>
@@ -51,8 +89,8 @@
                         </p>
 
                         <div class="d-flex align-items-center justify-content-between mt-auto">
-                            <span class="fw-bold text-dark fs-5">${{ number_format($course->price, 2) }}</span>
-                            <a href="{{ route('courses.show', $course->id) }}" class="btn btn-primary px-3 rounded-pill">
+                            <span class="fw-bold text-dark fs-5">Rp{{ number_format($course->price, 2) }}</span>
+                            <a href="{{ route('courses.show', $course->id) }}" class="btn btn-dark rounded-pill">
                                 View
                             </a>
                         </div>

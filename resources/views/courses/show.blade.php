@@ -59,7 +59,7 @@
             <h4 class="fw-semibold mt-4 mb-3">Lessons</h4>
 
             @if ($lessons->isEmpty())
-                <div class="alert alert-info rounded-4 p-3">
+                <div class="alert alert-dark rounded-4 p-3">
                     This course doesn’t have any lessons yet.
                 </div>
             @else
@@ -94,7 +94,7 @@
 
         {{-- SIDEBAR --}}
         <div class="col-lg-4">
-            <div class="card shadow-lg border-0 rounded-4">
+            <div class="card shadow-sm border border-2 border-dark-subtle rounded-4 mb-4">
 
                 @if ($course->thumbnail_url)
                     <img src="{{ $course->thumbnail_url }}"
@@ -106,7 +106,7 @@
                 <div class="card-body">
 
                     <h3 class="fw-bold mb-2">
-                        ${{ number_format($course->price, 2) }}
+                        Rp{{ number_format($course->price, 2) }}
                     </h3>
 
                     <p class="text-muted mb-3">
@@ -141,13 +141,65 @@
                         @else
                             <div class="d-grid gap-2">
                                 <a href="{{ route('payments.checkout', $course) }}"
-                                   class="btn btn-primary rounded-pill">
+                                    class="btn btn-dark rounded-pill">
                                     Enroll now
                                 </a>
                             </div>
                         @endif
                     @endguest
 
+                </div>
+            </div>
+
+            {{-- COMMENTS CARD --}}
+            <div class="card shadow-sm border border-2 border-secondary-subtle rounded-4">
+                    <div class="card-body">
+
+                        <h5 class="fw-semibold mb-3">Comments</h5>
+
+                        @auth
+                        @if($isEnrolled)
+                            {{-- COMMENT FORM --}}
+                            <form action="{{ route('comments.store', $course) }}" method="POST" class="mb-3">
+                                @csrf
+                                <textarea 
+                                    name="content"
+                                    class="form-control rounded-3 mb-2"
+                                    rows="3"
+                                    placeholder="Write your comment..."
+                                    required
+                                ></textarea>
+
+                            <button class="btn btn-dark btn-sm rounded-pill w-100">Post</button>
+                            </form>
+
+                        @else
+                        <p class="small text-muted">
+                            Enroll this course to write a comment.
+                        </p>
+                        @endif
+                    @else
+                    <p class="small text-muted">
+                        Login to see and write comments.
+                    </p>
+                    @endauth
+
+                    {{-- COMMENTS LIST --}}
+                    @forelse($comments as $comment)
+                        <div class="border-top pt-3 mt-3">
+                            <strong class="small">{{ $comment->user->name }}</strong>
+
+                            <p class="small text-muted mb-1">
+                                {{ $comment->created_at->diffForHumans() }}
+                            </p>
+
+                            <p class="mb-0">
+                                {{ $comment->content }}
+                            </p>
+                        </div>
+                    @empty
+                        <p class="small text-muted mt-3">No comments yet.</p>
+                    @endforelse
                 </div>
             </div>
         </div>

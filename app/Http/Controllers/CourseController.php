@@ -12,20 +12,45 @@ class CourseController extends Controller
     {
         $query = Course::withCount('lessons');
 
-        if ($request->has('search') && $request->search !== '') {
-            $query->where('title', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('description', 'LIKE', '%' . $request->search . '%');
+        //SEARCH
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('description', 'LIKE', '%' . $request->search . '%');
+            });
         }
 
-        $courses = $query->paginate(9);
+        //FILTER CATEGORY
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        //FILTER PRICE
+        if ($request->filled('price')) {
+            if ($request->price === '200+') {
+                $query->where('price', '>=', 200);
+            } else {
+                [$min, $max] = explode('-', $request->price);
+                $query->whereBetween('price', [(int)$min, (int)$max]);
+            }
+        }
+
+        $courses = $query
+            ->paginate(9)
+            ->withQueryString();
 
         return view('courses.index', compact('courses'));
     }
+
 
     public function show(Course $course)
     {
         $course->load(['lessons']);
         $lessons = $course->lessons()->orderBy('order')->get();
+
+        $comments = $course->comments()
+        ->latest()
+        ->get();
 
         $isEnrolled = false;
 
@@ -36,7 +61,7 @@ class CourseController extends Controller
                 ->exists();
         }
 
-        return view('courses.show', compact('course', 'lessons', 'isEnrolled'));
+        return view('courses.show', compact('course', 'lessons', 'comments', 'isEnrolled'));
     }
 
     public function enroll(Course $course)
