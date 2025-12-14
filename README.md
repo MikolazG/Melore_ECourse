@@ -13,7 +13,8 @@
   - Filter course berdasarkan kategori, misalnya:
     - Piano
     - Guitar
-    - Violin
+    - Drum
+    - Vocal
 - **Add to Cart**
   - Menambahkan course ke keranjang
   - Melanjutkan ke proses checkout
