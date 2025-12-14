@@ -654,11 +654,7 @@
                         <a href="{{ route('courses.index') }}" class="btn btn-hero-primary">
                             Get Started
                         </a>
-<<<<<<< HEAD
                         <a href="{{ route('contact') }}" class="btn btn-hero-outline">
-=======
-                        <a href="#step1" class="btn btn-hero-outline">
->>>>>>> ceaf9126595c83da507aaa6485195545493131c2
                             Contact Us
                         </a>
                     </div>
