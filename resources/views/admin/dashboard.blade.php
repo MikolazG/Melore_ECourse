@@ -33,14 +33,22 @@
     <div class="col-md-3 mb-3">
         <div class="card text-bg-light">
             <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Total Lessons</h6>
-                <h3 class="card-title mb-0">{{ $totalLessons }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">Total Instructors</h6>
+                <h3 class="card-title mb-0">{{ $totalInstructors }}</h3>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-light">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Total Lessons</h6>
+                <h3 class="card-title mb-0">{{ $totalLessons }}</h3>
+            </div>
+        </div>
+    </div>
     <div class="col-md-3 mb-3">
         <div class="card text-bg-light">
             <div class="card-body">
@@ -117,6 +125,46 @@
                                 <tr>
                                     <td colspan="4" class="text-muted text-center">
                                         No courses yet.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                Latest Instructors
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0 table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Courses</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($latestInstructors as $instructor)
+                                <tr>
+                                    <td>{{ $instructor->name }}</td>
+                                    <td>{{ $instructor->specialization ?? '-' }}</td>
+                                    <td>{{ $instructor->courses_count }}</td>
+                                    <td>{{ $instructor->created_at->format('Y-m-d') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-muted text-center">
+                                        No instructors yet.
                                     </td>
                                 </tr>
                             @endforelse

@@ -67,6 +67,11 @@
                         Manage Lessons
                     </a>
 
+                    <a class="nav-link {{ request()->routeIs('admin.instructors.*') ? 'active' : '' }}"
+                        href="{{ route('admin.instructors.index') }}">
+                        <i class="bi bi-person-badge"></i> Manage Instructors
+                    </a>
+
                     {{-- Optional: users list (belum dibuat controller-nya) --}}
                     {{-- <a href="#" class="list-group-item list-group-item-action">Users</a> --}}
                 </div>

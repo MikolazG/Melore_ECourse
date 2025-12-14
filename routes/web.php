@@ -13,6 +13,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminInstructorController;
 
 
 // Public routes
@@ -72,4 +73,5 @@ Route::prefix('admin')
 
         Route::resource('courses', AdminCourseController::class);
         Route::resource('courses.lessons', AdminLessonController::class);
+        Route::resource('instructors', AdminInstructorController::class);
     });

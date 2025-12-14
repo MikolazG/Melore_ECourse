@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 
@@ -18,13 +18,13 @@ class InstructorController extends Controller
 
         $instructors = $query->paginate(9);
 
-        return view('instructors.index', compact('instructors'));
+        return view('instructors.index', compact('instructors')); // Changed from admin.instructors.index
     }
 
     public function show(Instructor $instructor)
     {
         $courses = $instructor->courses()->withCount('lessons')->get();
 
-        return view('instructors.show', compact('instructor', 'courses'));
+        return view('instructors.show', compact('instructor', 'courses')); // Public view
     }
 }
