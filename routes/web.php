@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminLessonController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CommentController;
 use App\Http\Middleware\IsAdmin;
 
 // Public routes
@@ -59,3 +60,8 @@ Route::prefix('admin')
         Route::resource('courses', AdminCourseController::class);
         Route::resource('courses.lessons', AdminLessonController::class);
     });
+
+Route::post('/courses/{course}/comments', 
+    [CommentController::class, 'store']
+)->middleware('auth')
+->name('comments.store');

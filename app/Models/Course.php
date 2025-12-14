@@ -39,4 +39,10 @@ class Course extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
