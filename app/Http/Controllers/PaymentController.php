@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -23,7 +24,7 @@ class PaymentController extends Controller
 
     public function checkout(Course $course)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (! $user) {
             return redirect()->route('login');

@@ -53,7 +53,7 @@
                     Courses
                 </a>
 
-                <a href="#instructors"
+                <a href="{{ route('instructors.index') }}"
                    class="btn btn-sm rounded-pill px-4 me-1 pill-link">
                     Instructors
                 </a>

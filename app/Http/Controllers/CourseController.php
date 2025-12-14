@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -28,8 +29,8 @@ class CourseController extends Controller
 
         $isEnrolled = false;
 
-        if (auth()->check()) {
-            $isEnrolled = auth()->user()
+        if (Auth::check()) {
+            $isEnrolled = Auth::user()
                 ->courses()
                 ->where('course_id', $course->id)
                 ->exists();
@@ -40,7 +41,7 @@ class CourseController extends Controller
 
     public function enroll(Course $course)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (!$user) {
             return redirect()->route('login');

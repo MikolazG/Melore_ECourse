@@ -1,8 +1,26 @@
 <style>
+    html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .footer-melore {
+            flex-shrink: 0;
+        }
     .footer-melore {
         background-color: #050608;
         color: #f8f9fa;
         font-size: 0.95rem;
+
     }
 
     .footer-melore .footer-title {
@@ -39,7 +57,7 @@
         text-decoration: none;
         font-size: 1.3rem;
         font-weight: 500;
-        margin-bottom: .35rem;
+        /* margin-bottom: .35rem; */
     }
 
     .footer-melore .footer-menu a:hover {
@@ -71,7 +89,7 @@
     }
 </style>
 
-<footer class="footer-melore pt-5 pb-3 mt-5">
+<footer class="footer-melore pt-5 pb-0.5 mt-0.5">
     <div class="container">
 
         <div class="row g-4 align-items-start justify-content-center text-center text-lg-start">
@@ -81,7 +99,7 @@
                 <p class="footer-text mb-4">
                     Questions about courses or payments? Message us and our team will assist you.
                 </p>
-                <a href="#contact"
+                <a href="{{ route('contact') }}"
                    class="btn btn-outline-light btn-footer">
                     Contact us &rarr;
                 </a>
@@ -99,10 +117,10 @@
                     <a href="{{ route('courses.index') }}">
                         Courses
                     </a>
-                    <a href="#about">
+                    <a href="{{ route('about') }}">
                         About
                     </a>
-                    <a href="#contact">
+                    <a href="{{ route('contact') }}">
                         Contact
                     </a>
                 </div>

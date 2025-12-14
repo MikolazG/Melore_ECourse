@@ -10,11 +10,17 @@ use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminLessonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\IsAdmin;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\ContactController;
+
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+Route::get('/instructors', [InstructorController::class, 'index'])->name('instructors.index');
+Route::get('/instructors/{instructor}', [InstructorController::class, 'show'])->name('instructors.show');
 
 // Authentication
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -23,9 +29,16 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
 // Optional redirect after login
 Route::get('/redirect', function () {
-    $user = auth()->user();
+    $user = Auth::user();
 
     if (! $user) {
         return redirect()->route('login');
@@ -39,6 +52,7 @@ Route::get('/redirect', function () {
 // Authenticated user routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'home'])->name('profile.home');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/my-courses', [ProfileController::class, 'myCourses'])->name('profile.my-courses');
 
     // Enroll manual (kalau mau tetap dipakai)
