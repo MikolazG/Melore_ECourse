@@ -31,7 +31,7 @@
                         <td>{{ $course->id }}</td>
                         <td>{{ $course->title }}</td>
                         <td>{{ $course->level }}</td>
-                        <td>${{ number_format($course->price, 2) }}</td>
+                        <td>Rp{{ number_format($course->price, 2) }}</td>
                         <td>{{ $course->created_at->format('Y-m-d') }}</td>
                         <td class="text-end">
                             <a href="{{ route('admin.courses.lessons.index', $course->id) }}"

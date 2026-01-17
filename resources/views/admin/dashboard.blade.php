@@ -118,7 +118,7 @@
                                 <tr>
                                     <td>{{ $course->title }}</td>
                                     <td>{{ $course->level }}</td>
-                                    <td>${{ number_format($course->price, 2) }}</td>
+                                    <td>Rp{{ number_format($course->price, 2) }}</td>
                                     <td>{{ $course->created_at->format('Y-m-d') }}</td>
                                 </tr>
                             @empty
