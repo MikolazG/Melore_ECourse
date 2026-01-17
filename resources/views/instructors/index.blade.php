@@ -40,7 +40,6 @@
                         @endif
 
                         <div class="card-body d-flex flex-column">
-
                             <h5 class="fw-semibold mb-1">{{ $instructor->name }}</h5>
 
                             <p class="text-success small mb-2">
@@ -51,17 +50,12 @@
                                 {{ \Illuminate\Support\Str::limit($instructor->bio, 100) }}
                             </p>
 
-                            <div class="d-flex align-items-center justify-content-between mt-auto">
-                                <span class="text-muted small">
-                                    {{ $instructor->courses_count ?? 0 }}
-                                    {{ \Illuminate\Support\Str::plural('course', $instructor->courses_count ?? 0) }}
-                                </span>
+                            <div class="d-flex justify-content-end mt-auto">
                                 <a href="{{ route('instructors.show', $instructor->id) }}"
                                    class="btn btn-primary px-3 rounded-pill">
                                     View Profile
                                 </a>
                             </div>
-
                         </div>
 
                     </div>
@@ -75,7 +69,6 @@
     @endif
 </div>
 
-{{-- Hover effect --}}
 <style>
     .hover-shadow:hover {
         transform: translateY(-3px);

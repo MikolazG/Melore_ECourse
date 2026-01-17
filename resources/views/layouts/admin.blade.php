@@ -8,6 +8,9 @@
 
     {{-- Bootstrap 5.2 from public/bootstrap5.2 --}}
     <link href="{{ asset('bootstrap5.2/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    {{-- Optional: Bootstrap Icons (kalau mau icon) --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
 </head>
 <body class="bg-light">
 
@@ -51,6 +54,7 @@
             {{-- Sidebar --}}
             <nav class="col-md-3 col-lg-2 d-md-block bg-white border-end min-vh-100 p-0">
                 <div class="list-group list-group-flush rounded-0">
+
                     <a href="{{ route('admin.dashboard') }}"
                        class="list-group-item list-group-item-action {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         Dashboard
@@ -61,15 +65,12 @@
                         Manage Courses
                     </a>
 
-                    {{-- Lessons are nested under courses, jadi akses dari halaman course --}}
-                    <a href="{{ route('admin.courses.index') }}"
-                       class="list-group-item list-group-item-action">
-                        Manage Lessons
-                    </a>
 
-                    <a class="nav-link {{ request()->routeIs('admin.instructors.*') ? 'active' : '' }}"
-                        href="{{ route('admin.instructors.index') }}">
-                        <i class="bi bi-person-badge"></i> Manage Instructors
+
+                    {{-- FIXED: sebelumnya pakai nav-link jadi ga sejajar --}}
+                    <a href="{{ route('admin.instructors.index') }}"
+                       class="list-group-item list-group-item-action {{ request()->routeIs('admin.instructors.*') ? 'active' : '' }}">
+                        Manage Instructors
                     </a>
 
                     {{-- Optional: users list (belum dibuat controller-nya) --}}

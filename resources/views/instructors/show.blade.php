@@ -21,44 +21,6 @@
                 {{ $instructor->bio ?? 'No bio available.' }}
             </p>
 
-            {{-- Courses by this instructor --}}
-            <h4 class="fw-semibold mt-5 mb-3">Courses by {{ $instructor->name }}</h4>
-
-            @if ($courses->isEmpty())
-                <div class="alert alert-info rounded-4 p-3">
-                    This instructor doesn't have any courses yet.
-                </div>
-            @else
-                <div class="row g-4">
-                    @foreach ($courses as $course)
-                        <div class="col-md-6">
-                            <div class="card shadow-sm border-0 rounded-3 h-100">
-                                @if ($course->thumbnail_url)
-                                    <img src="{{ $course->thumbnail_url }}"
-                                         class="card-img-top rounded-top-3"
-                                         style="height: 150px; object-fit: cover;"
-                                         alt="{{ $course->title }}">
-                                @endif
-
-                                <div class="card-body">
-                                    <h6 class="fw-semibold mb-2">{{ $course->title }}</h6>
-                                    <p class="text-muted small mb-2">
-                                        {{ $course->category }} • {{ $course->level }}
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="fw-bold text-success">${{ number_format($course->price, 2) }}</span>
-                                        <a href="{{ route('courses.show', $course->id) }}"
-                                           class="btn btn-sm btn-primary rounded-pill">
-                                            View Course
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
         </div>
 
         {{-- SIDEBAR --}}
@@ -81,11 +43,6 @@
                     <h4 class="fw-bold mb-2">{{ $instructor->name }}</h4>
                     <p class="text-success mb-3">{{ $instructor->specialization ?? 'Music Instructor' }}</p>
 
-                    <div class="mb-3">
-                        <small class="text-muted d-block mb-1">Total Courses</small>
-                        <h5 class="fw-bold mb-0">{{ $courses->count() }}</h5>
-                    </div>
-
                     @if ($instructor->email)
                         <div class="mb-3">
                             <small class="text-muted d-block mb-1">Contact</small>
@@ -95,11 +52,10 @@
                         </div>
                     @endif
 
-                    @if ($instructor->social_links)
+                    @if (!empty($instructor->social_links))
                         <div class="mt-3">
                             <small class="text-muted d-block mb-2">Connect</small>
                             <div class="d-flex gap-2">
-                                {{-- Add social media links here --}}
                                 <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle">
                                     <i class="bi bi-instagram"></i>
                                 </a>
@@ -113,6 +69,7 @@
                         </div>
                     @endif
                 </div>
+
             </div>
         </div>
 
