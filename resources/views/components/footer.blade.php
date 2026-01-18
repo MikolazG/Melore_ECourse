@@ -89,15 +89,51 @@
     }
 </style>
 
+@php
+    $isHome    = request()->routeIs('home');
+    $isCourses = request()->routeIs('courses.*');
+    $isProfile = request()->routeIs('profile.*')
+        || request()->routeIs('login')
+        || request()->routeIs('register');
+
+    // current language (default EN)
+    $lang = session('lang', 'en');
+
+    // label dictionary
+    $t = [
+        'en' => [
+            'customersupp' => 'Customer Support',
+            'question' => 'Questions about courses or payments? Message us and our team will assist you.',
+            'menu' => 'MENU',
+            'home' => 'Home',
+            'courses' => 'Courses',
+            'about' => 'About',
+            'contact' => 'Contact',
+        ],
+        'id' => [
+            'customersupp' => 'Layanan Pelanggan',
+            'question' => 'Punya pertanyaan tentang kursus atau pembayaran? Kirim pesan kepada kami dan tim kami akan membantu.',
+            'menu' => 'MENU',
+            'home' => 'Beranda',
+            'courses' => 'Kursus',
+            'about' => 'Tentang Kami',
+            'contact' => 'Kontak',
+        ],
+    ];
+
+    $L = $t[$lang] ?? $t['en'];
+@endphp
+
+
 <footer class="footer-melore pt-5 pb-0.5 mt-0.5">
     <div class="container">
 
         <div class="row g-4 align-items-start justify-content-center text-center text-lg-start">
 
             <div class="col-12 col-lg-6">
-                <h5 class="footer-title mb-3">Customer Support</h5>
+                <h5 class="footer-title mb-3">{{ $L['customersupp'] }}</h5>
                 <p class="footer-text mb-4">
-                    Questions about courses or payments? Message us and our team will assist you.
+                    {{ $L['question'] }}
                 </p>
                 <a href="{{ route('contact') }}"
                    class="btn btn-outline-light btn-footer">
@@ -107,21 +143,21 @@
 
             <div class="col-12 col-lg-4 text-center text-lg-end">
                 <div class="footer-menu-label">
-                    MENU
+                    {{ $L['menu'] }}
                 </div>
 
                 <div class="footer-menu d-inline-block text-start">
                     <a href="{{ route('home') }}">
-                        Home
+                        {{ $L['home'] }}
                     </a>
                     <a href="{{ route('courses.index') }}">
-                        Courses
+                        {{ $L['courses'] }}
                     </a>
                     <a href="{{ route('about') }}">
-                        About
+                        {{ $L['about'] }}
                     </a>
                     <a href="{{ route('contact') }}">
-                        Contact
+                        {{ $L['contact'] }}
                     </a>
                 </div>
             </div>

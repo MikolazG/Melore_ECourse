@@ -1,42 +1,85 @@
+@php
+    $isHome    = request()->routeIs('home');
+    $isCourses = request()->routeIs('courses.*');
+    $isProfile = request()->routeIs('profile.*')
+        || request()->routeIs('login')
+        || request()->routeIs('register');
+
+    // current language (default EN)
+    $lang = session('lang', 'en');
+
+    // label dictionary
+    $t = [
+        'en' => [
+            'badge' => 'Platform • Online Music Courses',
+            'title' => 'Learn Music Smarter, With Mentors Who Actually Guide You',
+            'subtitle' => 'One platform for structured music learning — tracks, mentors, and a community that keeps you consistent.',
+            'get_started' => 'Get Started',
+            'contact' => 'Contact Us',
+            'featured' => 'Featured • Student Journey',
+            'videotag' => 'Your browser does not support the video tag.',
+            'practice' => 'Practice that feels directed.',
+            'follow' => 'Follow a track, watch lessons, get feedback, repeat.',
+            'mentor' => 'Mentor breakdown • Ask anything in the comments',
+
+        ],
+        'id' => [
+            'badge' => 'Platform • Kursus Musik Online',
+            'title' => 'Belajar Musik Lebih Cerdas, Dengan Mentor yang Benar-Benar Membimbing',
+            'subtitle' => 'Satu platform untuk pembelajaran musik terstruktur — jalur belajar, mentor, dan komunitas yang menjaga konsistensi Anda.',
+            'get_started' => 'Mulai Sekarang',
+            'contact' => 'Hubungi Kami',
+            'featured' => 'Unggulan • Perjalanan Murid',
+            'videotag' => 'Browser Anda tidak mendukung tag video.',
+            'practice' => 'Latihan yang terasa terarah.',
+            'follow' => 'Ikuti sebuah trek, tonton pelajaran, dapatkan umpan balik, ulangi.',
+            'mentor' => 'Penjelasan mentor • Tanyakan apa saja di kolom komentar',
+        ],
+    ];
+
+    $L = $t[$lang] ?? $t['en'];
+@endphp
+
 <section class="hero">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">
         <div class="d-inline-block">
-          <span class="badge-pill"><span class="badge-dot"></span> PLATFORM • ONLINE MUSIC COURSES</span>
+          <span class="badge-pill"><span class="badge-dot"></span> {{ $L['badge'] }}</span>
         </div>
 
         <h1 class="hero-title">
-          Learn Music Smarter,<br>With Mentors Who Actually Guide You
+          <!-- {{ __('landing.title') }} -->
+          {{ $L['title'] }}
         </h1>
 
         <p class="hero-sub">
-          One platform for structured music learning — tracks, mentors, and a community that keeps you consistent.
+          {{ $L['subtitle'] }}
         </p>
 
         <div class="d-flex flex-wrap justify-content-center gap-3 hero-actions">
           <a href="{{ route('courses.index') }}" class="btn btn-pill btn-primary-modern">
-            Get Started
+            {{ $L['get_started'] }}
           </a>
           <a href="{{ route('contact') }}" class="btn btn-pill btn-outline-modern">
-            Contact Us
+            {{ $L['contact'] }}
           </a>
         </div>
 
         <div class="video-wrap">
           <div class="video-topbar">
             <div class="win-dots"><span></span><span></span><span></span></div>
-            <span class="video-chip">Featured • Student Journey</span>
+            <span class="video-chip">{{ $L['featured'] }}</span>
           </div>
 
           <video class="hero-video" autoplay muted loop playsinline controls>
             <source src="{{ asset('vids/LA1.mp4') }}" type="video/mp4">
-            Your browser does not support the video tag.
+            {{ $L['videotag'] }}
           </video>
 
           <div class="video-cta">
-            <h5 class="mb-1">Practice that feels directed.</h5>
-            <p>Follow a track, watch lessons, get feedback, repeat.</p>
+            <h5 class="mb-1">{{ $L['practice'] }}</h5>
+            <p>{{ $L['follow'] }}</p>
           </div>
         </div>
 
@@ -67,7 +110,7 @@
                 <div class="hcard-body">
                   <span class="hpill danger">24/7 Answer</span>
                   <div class="htitle">Q&amp;A Session</div>
-                  <div class="hmeta">Mentor breakdown • Ask anything in the comments</div>
+                  <div class="hmeta">{{ $L['mentor'] }}</div>
                 </div>
               </div>
             </div>

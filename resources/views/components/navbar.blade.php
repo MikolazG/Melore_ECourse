@@ -112,6 +112,18 @@
                     {{ $L['instructors'] }}
                 </a>
 
+                <!-- <a href="{{ route('home') }}">
+                     {{ __('nav.home') }}
+                </a>
+
+                <a href="{{ route('courses.index') }}">
+                    {{ __('nav.courses') }}
+                </a>
+
+                <a href="{{ route('instructors.index') }}">
+                    {{ __('nav.instructors') }}
+                </a> -->
+
                 @auth
                     <a href="{{ route('profile.home') }}"
                        class="btn btn-sm rounded-pill px-4 pill-link {{ $isProfile ? 'active-pill' : '' }}">
@@ -134,10 +146,12 @@
             <form action="{{ route('lang.switch') }}" method="POST" class="mb-0 me-3">
                 @csrf
                 <div class="lang-seg">
+                    
+                    @php $current = app()->getLocale(); @endphp
                     <button type="submit" name="lang" value="en" class="{{ $lang === 'en' ? 'active' : '' }}">EN</button>
                     <button type="submit" name="lang" value="id" class="{{ $lang === 'id' ? 'active' : '' }}">ID</button>
                 </div>
-            </form>
+            </form>        
 
             @auth
                 <span class="me-3 small text-muted d-none d-xl-inline">
