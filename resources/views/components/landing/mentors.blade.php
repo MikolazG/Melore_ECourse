@@ -1,7 +1,34 @@
+@php
+    $isHome    = request()->routeIs('home');
+    $isCourses = request()->routeIs('courses.*');
+    $isProfile = request()->routeIs('profile.*')
+        || request()->routeIs('login')
+        || request()->routeIs('register');
+
+    // current language (default EN)
+    $lang = session('lang', 'en');
+
+    // label dictionary
+    $t = [
+        'en' => [
+            'experts' => 'LEARN WITH EXPERTS',
+            'meetment' => 'Meet the mentors guiding your journey',
+            'seemen' => 'See mentors →',
+        ],
+        'id' => [
+            'experts' => 'BELAJAR BERSAMA PARA AHLI',
+            'meetment' => 'Kenali para mentor yang membimbing perjalanan belajarmu',
+            'seemen' => 'Lihat mentor →',
+        ],
+    ];
+
+    $L = $t[$lang] ?? $t['en'];
+@endphp
+
 <section class="section mentors">
   <div class="container">
-    <div class="section-label">LEARN WITH EXPERTS</div>
-    <h2 class="section-title">Meet the mentors guiding your journey</h2>
+    <div class="section-label">{{ $L['experts'] }}</div>
+    <h2 class="section-title">{{ $L['meetment'] }}</h2>
 
     <div class="mentor-grid">
       <div class="mcard">
@@ -9,7 +36,7 @@
         <div class="mbody">
           <p class="mname">Evelyn H.</p>
           <p class="mrole">Guitar • Performance</p>
-          <a class="mlink" href="{{ route('instructors.index') }}">See mentors →</a>
+          <a class="mlink" href="{{ route('instructors.index') }}">{{ $L['seemen'] }}</a>
         </div>
       </div>
 
@@ -18,7 +45,7 @@
         <div class="mbody">
           <p class="mname">Aiko Tan</p>
           <p class="mrole">Piano • Foundations</p>
-          <a class="mlink" href="{{ route('instructors.index') }}">See mentors →</a>
+          <a class="mlink" href="{{ route('instructors.index') }}">{{ $L['seemen'] }}</a>
         </div>
       </div>
 
@@ -27,7 +54,7 @@
         <div class="mbody">
           <p class="mname">Stevie Adrian</p>
           <p class="mrole">Drums • Groove</p>
-          <a class="mlink" href="{{ route('instructors.index') }}">See mentors →</a>
+          <a class="mlink" href="{{ route('instructors.index') }}">{{ $L['seemen'] }}</a>
         </div>
       </div>
 
@@ -36,7 +63,7 @@
         <div class="mbody">
           <p class="mname">William Adrian</p>
           <p class="mrole">Vocal • Technique</p>
-          <a class="mlink" href="{{ route('instructors.index') }}">See mentors →</a>
+          <a class="mlink" href="{{ route('instructors.index') }}">{{ $L['seemen'] }}</a>
         </div>
       </div>
     </div>
